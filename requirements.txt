@@ -1,0 +1,5 @@
+google-genai
+notion-client
+streamlit
+google-generativeai
+Pillow
