@@ -47,6 +47,10 @@ with st.sidebar:
 
     st.info("💡 **Tip:** E471 is very common. It is only Halal if marked 'Plant-based' or 'Soy origin'.")
 
+    # --- NEW ADDITION: SIDEBAR DISCLAIMER ---
+    st.divider()
+    st.caption("⚠️ **Disclaimer:** This tool uses Artificial Intelligence. It may make mistakes. Always verify with official Halal certification bodies.")
+
 # --- 3. MAIN APP INTERFACE ---
 st.title("Global Halal Scanner 🌏")
 st.markdown("""
@@ -142,3 +146,15 @@ if uploaded_file is not None:
 
                 except Exception as e:
                     st.error(f"An error occurred: {e}")
+
+# --- NEW ADDITION: FOOTER DISCLAIMER ---
+st.divider()
+st.markdown("""
+<div style="text-align: center; color: #888;">
+    <small>
+    ⚠️ <b>Disclaimer:</b> This application uses Google Gemini AI to analyze ingredients. <br>
+    AI can hallucinate or misread text. This tool is for <b>informational purposes only</b> and does not constitute a fatwa or official Halal certification. <br>
+    When in doubt, it is safer to avoid.
+    </small>
+</div>
+""", unsafe_allow_html=True)
