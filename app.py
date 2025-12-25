@@ -13,7 +13,7 @@ else:
     st.stop()
 
 # Using Flash for speed
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-flash-latest")
 
 # --- 2. BETA GATE (THE VELVET ROPE) ---
 if 'authenticated' not in st.session_state:
@@ -36,9 +36,9 @@ if not st.session_state.authenticated:
     with col1:
         st.text_input("Enter Access Code:", key="password", on_change=check_password)
     
-    st.markdown("""
+    st.markdown(f"""
         Don't have a code?  
-        👉 **[Click here to get instant access sent to your inbox](https://forms.google.com/YOUR_FORM_LINK_HERE)**
+        👉 **[Click here to get instant access sent to your inbox](https://khairul-builds.kit.com/halal-lens-beta)**
     """)
     st.stop() # Stops the app here if not logged in
 
