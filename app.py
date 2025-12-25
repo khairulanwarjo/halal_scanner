@@ -38,7 +38,7 @@ if not st.session_state.authenticated:
     
     st.markdown("""
         Don't have a code?  
-        👉 **[Click here to DM me "BETA" on Instagram to get it instantly](https://ig.me/m/khairul.builds)**
+        👉 **[Click here to DM me "BETA" on Instagram to get it instantly!](https://ig.me/m/khairul.builds)**
     """)
     st.stop() # Stops the app here if not logged in
 
