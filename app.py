@@ -74,11 +74,15 @@ with col2:
     st.title("Halal Lens")
     st.write("Decipher foreign snacks instantly. Snap, Upload, Eat (or Don't).")
 
+# 1. The Uploader (Clean, no help text inside)
 uploaded_file = st.file_uploader(
     "📸 Take a Photo or Upload from Library", 
-    type=["jpg", "jpeg", "png"],
-    help="If your camera screen is black, check your browser permissions or take the photo first and select 'Photo Library'."
+    type=["jpg", "jpeg", "png"]
 )
+
+# 2. The Tip (Subtle text underneath)
+if not uploaded_file:
+    st.caption("📱 **Mobile Tip:** If the camera screen is black, check your browser permissions or take the photo normally first, then select 'Photo Library' here.")
 
 # System Prompt for Strict JSON Logic
 system_prompt = """
