@@ -19,9 +19,17 @@ model = genai.GenerativeModel("gemini-flash-latest")
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
 
+# 1. Check if the code is already in the URL (Auto-Login)
+# This allows the user to refresh without losing access
+if "code" in st.query_params:
+    if st.query_params["code"].upper() == "LENS2025":
+        st.session_state.authenticated = True
+
 def check_password():
     if st.session_state.password.upper() == 'LENS2025': 
         st.session_state.authenticated = True
+        # 2. Save the code to the URL so it persists on refresh
+        st.query_params["code"] = "LENS2025"
     else:
         st.error("Incorrect access code. Please check your email or DM @khairul.builds")
 
