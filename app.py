@@ -19,8 +19,7 @@ model = genai.GenerativeModel("gemini-flash-latest")
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
 
-# 1. Check if the code is already in the URL (Auto-Login)
-# This allows the user to refresh without losing access
+# 1. AUTO-LOGIN: Check if the code is already in the URL
 if "code" in st.query_params:
     if st.query_params["code"].upper() == "LENS2025":
         st.session_state.authenticated = True
@@ -28,13 +27,11 @@ if "code" in st.query_params:
 def check_password():
     if st.session_state.password.upper() == 'LENS2025': 
         st.session_state.authenticated = True
-        # 2. Save the code to the URL so it persists on refresh
-        st.query_params["code"] = "LENS2025"
     else:
         st.error("Incorrect access code. Please check your email or DM @khairul.builds")
 
+# 2. THE GATE: Show Login if not authenticated
 if not st.session_state.authenticated:
-    # Login Screen
     st.title("Halal Lens 🔍")
     st.caption("The AI Copilot for Halal Grocery Shopping.")
     
@@ -49,6 +46,12 @@ if not st.session_state.authenticated:
         👉 **[Click here to DM me "BETA" on Instagram to get it instantly!](https://ig.me/m/khairul.builds)**
     """)
     st.stop() # Stops the app here if not logged in
+
+# 3. SUCCESS STATE: If they passed the gate, ensure the URL is saved
+# This runs immediately after they log in, forcing the URL to update.
+if "code" not in st.query_params:
+    st.query_params["code"] = "LENS2025"
+    st.rerun() # <--- This magic command forces the browser to refresh with the new URL
 
 # --- 3. SIDEBAR (EDUCATOR MODE) ---
 with st.sidebar:
