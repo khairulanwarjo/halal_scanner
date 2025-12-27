@@ -19,19 +19,26 @@ model = genai.GenerativeModel("gemini-flash-latest")
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
 
-# 1. AUTO-LOGIN: Check if the code is already in the URL
+# A. CHECK URL PARAMETERS FIRST (Auto-Login)
+# We check this at the very start of every run
 if "code" in st.query_params:
-    if st.query_params["code"].upper() == "LENS2025":
+    # Use .get() to avoid errors if the param is empty
+    query_code = st.query_params.get("code", "")
+    if query_code.upper() == "LENS2025":
         st.session_state.authenticated = True
 
+# B. DEFINE PASSWORD CHECK FUNCTION
 def check_password():
     if st.session_state.password.upper() == 'LENS2025': 
         st.session_state.authenticated = True
+        # Force the URL update immediately upon success
+        st.query_params["code"] = "LENS2025"
     else:
         st.error("Incorrect access code. Please check your email or DM @khairul.builds")
 
-# 2. THE GATE: Show Login if not authenticated
+# C. THE GATEKEEPER
 if not st.session_state.authenticated:
+    # Login Screen
     st.title("Halal Lens 🔍")
     st.caption("The AI Copilot for Halal Grocery Shopping.")
     
@@ -46,6 +53,8 @@ if not st.session_state.authenticated:
         👉 **[Click here to DM me "BETA" on Instagram to get it instantly!](https://ig.me/m/khairul.builds)**
     """)
     st.stop() # Stops the app here if not logged in
+
+# --- IF WE PASS THE GATE, THE MAIN APP LOADS BELOW ---
 
 # 3. SUCCESS STATE: If they passed the gate, ensure the URL is saved
 # This runs immediately after they log in, forcing the URL to update.
