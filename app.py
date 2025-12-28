@@ -141,6 +141,8 @@ if uploaded_file is not None:
 
     with col2:
         if st.button("🔍 Scan Ingredients", type="primary", use_container_width=True):
+            # LOG THE ACTION 👇
+            print(f"📸 SCAN INITIATED at {datetime.datetime.now()}")
             with st.spinner("Analyzing with Gemini Vision..."):
                 try:
                     # Prepare image for API
@@ -161,6 +163,8 @@ if uploaded_file is not None:
                     
                     # Parse JSON
                     result = json.loads(text_response)
+                    # LOG THE RESULT 👇
+                    print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}")
                     
                     # Extract Data
                     status = result.get("status", "MUSHBOOH")
