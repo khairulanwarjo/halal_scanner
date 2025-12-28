@@ -163,14 +163,15 @@ if uploaded_file is not None:
                     
                     # Parse JSON
                     result = json.loads(text_response)
-                    # LOG THE RESULT 👇
-                    print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}")
                     
                     # Extract Data
                     status = result.get("status", "MUSHBOOH")
                     language = result.get("detected_language", "Unknown")
                     flags = result.get("flagged_ingredients", [])
                     reason = result.get("reason", "Please verify manually.")
+
+                    # LOG THE RESULT 👇
+                    print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}")
 
                     # --- TRAFFIC LIGHT UI ---
                     st.caption(f"Detected Language: {language}")
