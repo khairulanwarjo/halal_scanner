@@ -141,11 +141,7 @@ if uploaded_file is not None:
 
     with col2:
         if st.button("🔍 Scan Ingredients", type="primary", use_container_width=True):
-            # LOG THE ACTION 👇
-            print(f"📸 SCAN INITIATED at {datetime.datetime.now()}")
             with st.spinner("Analyzing with Gemini Vision..."):
-                # LOG THE RESULT 👇
-                print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}")
                 try:
                     # Prepare image for API
                     image_parts = [
