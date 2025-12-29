@@ -35,11 +35,11 @@ def check_password():
         # Force the URL update immediately upon success
         st.query_params["code"] = "LENS2025"
         # LOG THE WIN 👇
-        print(f"🔓 LOGIN SUCCESS at {datetime.datetime.now()}")
+        print(f"🔓 LOGIN SUCCESS at {datetime.datetime.now()}",flush=True)
     else:
         st.error("Incorrect access code. Please check your email or DM @khairul.builds")
         # LOG THE FAIL 👇
-        print(f"🔒 LOGIN FAILED at {datetime.datetime.now()}")
+        print(f"🔒 LOGIN FAILED at {datetime.datetime.now()}", flush=True)
 
 # C. THE GATEKEEPER
 if not st.session_state.authenticated:
@@ -142,7 +142,7 @@ if uploaded_file is not None:
     with col2:
         if st.button("🔍 Scan Ingredients", type="primary", use_container_width=True):
             # LOG THE ACTION 👇
-            print(f"📸 SCAN INITIATED at {datetime.datetime.now()}")
+            print(f"📸 SCAN INITIATED at {datetime.datetime.now()}", flush=True)
             with st.spinner("Analyzing with Gemini Vision..."):
                 try:
                     # Prepare image for API
@@ -171,7 +171,7 @@ if uploaded_file is not None:
                     reason = result.get("reason", "Please verify manually.")
 
                     # LOG THE RESULT 👇
-                    print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}")
+                    print(f"✅ RESULT DELIVERED: {status} at {datetime.datetime.now()}", flush=True)
 
                     # --- TRAFFIC LIGHT UI ---
                     st.caption(f"Detected Language: {language}")
